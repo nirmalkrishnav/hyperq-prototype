@@ -14,18 +14,21 @@
     <p class="ion-padding list-heading">Favourite Doctors</p>
     <div *ngIf="!skeletonLoading">
       <ion-list>
-        <ion-item lines="inset" *ngFor="let doctor of doctors" (click)="showDetails(doctor)">
-          <ion-avatar slot="start">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
-          </ion-avatar>
-          <ion-label>
-            <h3>
-              {{doctor.name}}
-            </h3>
-            <p>{{doctor.address}}</p>
-            <p>{{doctor.contact}}</p>
-          </ion-label>
-        </ion-item>
+        <ion-card *ngFor="let doctor of doctors" (click)="showDetails(doctor)">
+          <ion-item>
+
+            <ion-avatar slot="start">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+            </ion-avatar>
+            <ion-label>
+              <h3>
+                {{doctor.name}}
+              </h3>
+              <p>{{doctor.address}}</p>
+              <p>{{doctor.contact}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
       </ion-list>
     </div>
     <!-- Skeleton screen -->

@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGaurdGuard } from './../auth/auth-gaurd.guard';
 
 const routes: Routes = [
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'details/:id/:name', loadChildren: './details/details.module#DetailsPageModule' },
-  { path: 'tab4', loadChildren: './tab3/tab4/tab4.module#Tab4PageModule' },
-  { path: 'tab5', loadChildren: './tab5/tab5.module#Tab5PageModule' }
+  { path: 'tab4', canActivate: [AuthGaurdGuard], loadChildren: './tab4/tab4.module#Tab4PageModule' },
+  { path: 'tab5', canActivate: [AuthGaurdGuard], loadChildren: './tab5/tab5.module#Tab5PageModule' },
+  { path: 'login', loadChildren: './public/login/login.module#LoginPageModule' },
+  {
+    path: 'public',
+    canActivate: [AuthGaurdGuard],
+    loadChildren: './tabs/tabs.module#TabsPageModule'
+  },
 ];
 @NgModule({
   imports: [

@@ -6,6 +6,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { IonicStorageModule } from '@ionic/storage';
+
+
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
@@ -26,7 +29,9 @@ import { AppComponent } from './app.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     IonicModule.forRoot(),
-    AppRoutingModule],
+    AppRoutingModule,
+    IonicStorageModule.forRoot()
+  ],
   providers: [
     HttpClientModule,
     StatusBar,
