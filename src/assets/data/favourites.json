@@ -1,0 +1,64 @@
+{
+    "doctors": [
+        {
+            "id": 1,
+            "name": "Dr. Nirmal Krishna",
+            "rating": 5,
+            "address": "Chennai, velachery",
+            "phone": "+91 93083 83923"
+        },
+        {
+            "id": 2,
+            "name": "Dr. Shashank",
+            "rating": 2,
+            "address": "Guindy",
+            "phone": "+91 93083 83923"
+        },
+        {
+            "id": 2,
+            "name": "Dr. Nirmala Seetharaman",
+            "rating": 3,
+            "address": "Chennai",
+            "phone": "+91 93083 83923"
+        },
+        {
+            "id": 3,
+            "name": "Dr. Santosh",
+            "rating": 5,
+            "address": "Chennai, velachery",
+            "phone": "+91 93083 83923"
+        },
+        {
+            "id": 4,
+            "name": "Dr. Ramarajan",
+            "rating": 4,
+            "address": "Chennai, velachery",
+            "phone": "+91 93083 83923"
+        }
+    ],
+    "hospitals": [
+        {
+            "id": 1,
+            "name": "Vijaya Hospital",
+            "rating": 5,
+            "address": "Chennai, Vadapalani",
+            "phone": "+91 93083 83923"
+        },
+        {
+            "id": 2,
+            "name": "Apollo Hospital",
+            "rating": 4,
+            "address": "Chennai, Guindy",
+            "phone": "+91 93083 83923"
+        }
+    ],
+    "favourites": {
+        "doctors": [
+            1,
+            3
+        ],
+        "hospitals": [
+            2
+        ]
+    }
+}

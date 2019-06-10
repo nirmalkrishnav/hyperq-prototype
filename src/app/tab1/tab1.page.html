@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>
+      Search
+    </ion-title> -->
+    <ion-searchbar placeholder="Search" animated [(ngModel)]="searchedTerm"></ion-searchbar>
+    <ion-button (click)="searchTerm()">search</ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <p class="ion-padding list-heading">Favourite Doctors</p>
+    <div *ngIf="!skeletonLoading">
+      <ion-list>
+        <ion-item lines="inset" *ngFor="let doctor of doctors" (click)="showDetails(doctor)">
+          <ion-avatar slot="start">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              {{doctor.name}}
+            </h3>
+            <p>{{doctor.address}}</p>
+            <p>{{doctor.contact}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <!-- Skeleton screen -->
+    <div *ngIf="skeletonLoading">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+
+      <ion-list>
+        <ion-list-header>
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        </ion-list-header>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <p class="ion-padding list-heading">Favourite Hospitals</p>
+    <div *ngIf="!skeletonLoading">
+      <ion-list>
+        <ion-item lines="inset" *ngFor="let hospital of hospitals">
+          <ion-avatar slot="start">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              {{hospital.name}}
+            </h3>
+            <p>{{hospital.address}}</p>
+            <p>{{hospital.contact}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <!-- Skeleton screen -->
+    <div *ngIf="skeletonLoading">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+
+      <ion-list>
+        <ion-list-header>
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        </ion-list-header>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+</ion-content>

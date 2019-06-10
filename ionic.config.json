@@ -1,0 +1,8 @@
+{
+  "name": "hyperQ",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "1c50f00b"
+}
