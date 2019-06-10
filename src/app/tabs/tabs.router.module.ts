@@ -48,7 +48,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './../tab5/tab5.module#Tab5PageModule'
+            loadChildren: '../tab5/tab5.module#Tab5PageModule'
           }
         ]
       },
