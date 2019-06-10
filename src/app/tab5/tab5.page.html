@@ -6,12 +6,26 @@
 
 <ion-content>
 
-  <h3>Howdy, {{ autherservice.userData.displayName }}</h3>
-  <img [src]="autherservice.userData.photoURL">
-  <p>UID: {{ autherservice.userData.uid }}</p>
-  <p>Favorite Color: {{ autherservice.userData.favoriteColor }} </p>
+  <!-- <h3>Howdy, </h3>
+  <img>
+  <p>UID: </p>
+  <p>Favorite Color:  </p> -->
 
-  <ion-button (click)="logout()">
-    logout
-  </ion-button>
+
+  <ion-item>
+    <ion-label>{{ autherservice.userData.displayName }}
+      <p>{{ autherservice.userData.email }}</p>
+      <p>{{ autherservice.userData.uid }}</p>
+      <p>
+        <ion-button (click)="logout()" fill="clear" size="small" href="#">
+          logout
+        </ion-button>
+      </p>
+    </ion-label>
+    <ion-thumbnail slot="end">
+      <img [src]="autherservice.userData.photoURL">
+    </ion-thumbnail>
+
+  </ion-item>
+
 </ion-content>
