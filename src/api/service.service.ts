@@ -13,6 +13,7 @@ import { DocumentSnapshot } from '@firebase/firestore-types';
 export class ServiceService {
   hospitalRef = 'hospitals';
   doctorRef = 'doctors';
+
   constructor(
     private http: Http,
     private db: AngularFirestore
@@ -29,5 +30,19 @@ export class ServiceService {
   public serachTerm(searchedTerm): Observable<any> {
     return this.db.collection(this.doctorRef, ref => ref.where('name', '==', searchedTerm)).get();
     //return this.db.collection(this.doctorRef, ref => ref.orderBy('name').startAt(searchedTerm)).get();
+  }
+
+  public fetchDoctorDetail(id: string): Observable<any> {
+    return this.db.collection(this.doctorRef).doc(id).get();
+  }
+
+  public fetchDoctorReviews(id: string): Observable<any> {
+    return this.db.collection(this.doctorRef).doc(id).collection('reviews').get();
+  }
+
+  public fetchReviewsUserWrote(userid: string): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.db.collectionGroup('reviews').get();
+
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/auth/authentication.service';
 import { map, subscribeOn } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { ServiceService } from 'src/api/service.service';
 
 @Component({
   selector: 'app-tab5',
@@ -10,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab5Page implements OnInit {
 
-  constructor(public autherservice: AuthenticationService, public alertController: AlertController) {
+  constructor(public autherservice: AuthenticationService, public alertController: AlertController, private service: ServiceService) {
   }
 
   async presentAlertMultipleButtons() {
@@ -43,6 +44,11 @@ export class Tab5Page implements OnInit {
   }
 
   ngOnInit() {
+    this.service.fetchReviewsUserWrote(this.autherservice.userData.uid).subscribe(querySnapshot => {
+      querySnapshot.forEach(function (doc) {
+        console.log(doc.id, ' => ', doc.data());
+      });
+    });
   }
 
 }

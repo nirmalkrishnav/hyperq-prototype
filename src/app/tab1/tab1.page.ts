@@ -82,7 +82,7 @@ export class Tab1Page {
 
   showDetails(doctor): void {
     // console.log(doctor);
-    this.router.navigate([`/details/${doctor.id}/${doctor.name}`]);
+    this.router.navigate([`/details/${doctor.ID}/${doctor.name}`]);
   }
 
 

@@ -11,23 +11,48 @@
 
 <ion-content>
   <div class="container">
-    <p class="ion-padding list-heading">Favourite Doctors</p>
+    <p class="ion-padding list-heading">Doctors</p>
     <div *ngIf="!skeletonLoading">
       <ion-list>
-        <ion-card *ngFor="let doctor of doctors" (click)="showDetails(doctor)">
-          <ion-item>
+        <ion-card class="welcome-card" *ngFor="let doctor of doctors" (click)="showDetails(doctor)">
 
-            <ion-avatar slot="start">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
-            </ion-avatar>
+
+          <ion-img src="/assets/shapes.svg"></ion-img>
+          <ion-card-content>
             <ion-label>
-              <h3>
+              <h6>
                 {{doctor.name}}
-              </h3>
-              <p>{{doctor.address}}</p>
-              <p>{{doctor.contact}}</p>
+              </h6>
+              <p class="small">
+                {{doctor.bio}}
+              </p>
             </ion-label>
-          </ion-item>
+
+            <p>
+
+              <ion-badge color="primary">
+                <ion-icon name="thumbs-up"></ion-icon>
+                {{doctor.rating * 10}}
+              </ion-badge>
+
+              <ion-badge color="light">
+                <ion-icon name="chatboxes"></ion-icon>
+                {{doctor.rating * 2}}
+              </ion-badge>
+              <ion-badge color="light">
+                <ion-icon name="pin"></ion-icon>
+                {{doctor.address}}
+              </ion-badge>
+
+            </p>
+            <p>Rs.{{doctor.fee}}</p>
+            <ion-text color="secondary">
+              <span class="uk-text-small" *ngFor="let spl  of doctor.special">
+                #{{spl}}
+              </span>
+            </ion-text>
+          </ion-card-content>
+
         </ion-card>
       </ion-list>
     </div>
@@ -67,7 +92,7 @@
 
 
   <div class="container">
-    <p class="ion-padding list-heading">Favourite Hospitals</p>
+    <p class="ion-padding list-heading">Hospitals</p>
     <div *ngIf="!skeletonLoading">
       <ion-list>
         <ion-item lines="inset" *ngFor="let hospital of hospitals">
