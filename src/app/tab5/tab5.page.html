@@ -28,4 +28,8 @@
 
   </ion-item>
 
+  <ion-text *ngFor="let review of myReviews">
+    {{review.comment}} on {{review.date}}
+  </ion-text>
+
 </ion-content>

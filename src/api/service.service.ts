@@ -42,7 +42,7 @@ export class ServiceService {
 
   public fetchReviewsUserWrote(userid: string): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.db.collectionGroup('reviews').get();
+    return this.db.collectionGroup('reviews', data => data.where('userid', '==', userid)).get();
 
   }
 }

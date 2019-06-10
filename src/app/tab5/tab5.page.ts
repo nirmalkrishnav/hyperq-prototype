@@ -11,6 +11,8 @@ import { ServiceService } from 'src/api/service.service';
 })
 export class Tab5Page implements OnInit {
 
+  myReviews: any;
+
   constructor(public autherservice: AuthenticationService, public alertController: AlertController, private service: ServiceService) {
   }
 
@@ -45,8 +47,9 @@ export class Tab5Page implements OnInit {
 
   ngOnInit() {
     this.service.fetchReviewsUserWrote(this.autherservice.userData.uid).subscribe(querySnapshot => {
-      querySnapshot.forEach(function (doc) {
-        console.log(doc.id, ' => ', doc.data());
+      this.myReviews = [];
+      querySnapshot.forEach(doc => {
+        this.myReviews.push(doc.data());
       });
     });
   }
