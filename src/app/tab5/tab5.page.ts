@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/auth/authentication.service';
+import { map, subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab5',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab5Page implements OnInit {
 
-  constructor() { }
+  constructor(private autherservice: AuthenticationService) {
+  }
+
+  logout() {
+    this.autherservice.signOut();
+  }
 
   ngOnInit() {
   }

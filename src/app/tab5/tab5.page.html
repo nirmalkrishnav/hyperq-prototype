@@ -6,4 +6,12 @@
 
 <ion-content>
 
+  <h3>Howdy, {{ autherservice.userData.displayName }}</h3>
+  <img [src]="autherservice.userData.photoURL">
+  <p>UID: {{ autherservice.userData.uid }}</p>
+  <p>Favorite Color: {{ autherservice.userData.favoriteColor }} </p>
+
+  <ion-button (click)="logout()">
+    logout
+  </ion-button>
 </ion-content>

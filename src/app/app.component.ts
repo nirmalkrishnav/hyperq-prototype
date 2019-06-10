@@ -26,15 +26,6 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       console.log('initialisd');
-
-      this.authenticationService.authenticationState.subscribe(state => {
-        if (state) {
-          this.router.navigate(['public']);
-        } else {
-          this.router.navigate(['login']);
-        }
-      });
-
     });
   }
 }

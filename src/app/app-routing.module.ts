@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGaurdGuard } from './../auth/auth-gaurd.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'public', pathMatch: 'full' },
   { path: 'details/:id/:name', loadChildren: './details/details.module#DetailsPageModule' },
   { path: 'tab4', canActivate: [AuthGaurdGuard], loadChildren: './tab4/tab4.module#Tab4PageModule' },
   { path: 'tab5', canActivate: [AuthGaurdGuard], loadChildren: './tab5/tab5.module#Tab5PageModule' },
