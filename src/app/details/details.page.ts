@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/api/service.service';
 import { AuthenticationService } from 'src/auth/authentication.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-details',
@@ -56,10 +57,14 @@ export class DetailsPage implements OnInit {
       comment: this.myReview,
       date: new Date(),
       displayName: this.autherservice.userData.displayName,
-      userid: this.autherservice.userData.uid
+      userid: this.autherservice.userData.uid,
+      docName: this.doctorDetails.name
     };
 
-    this.service.submitReviewForDoctor(this.id, review);
+    this.service.submitReviewForDoctor(this.id, review).finally(() => {
+      this.reviews.unshift(review);
+      this.myReview = null;
+    });
   }
 
 

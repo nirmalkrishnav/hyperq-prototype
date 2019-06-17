@@ -49,7 +49,9 @@ export class Tab5Page implements OnInit {
     this.service.fetchReviewsUserWrote(this.autherservice.userData.uid).subscribe(querySnapshot => {
       this.myReviews = [];
       querySnapshot.forEach(doc => {
-        this.myReviews.push(doc.data());
+        const r = doc.data();
+        r['id'] = doc.id;
+        this.myReviews.push(r);
       });
     });
   }

@@ -37,12 +37,12 @@ export class ServiceService {
   }
 
   public fetchDoctorReviews(id: string): Observable<any> {
-    return this.db.collection(this.doctorRef).doc(id).collection('reviews').get();
+    return this.db.collection(this.doctorRef).doc(id).collection('reviews', data => data.orderBy('date', 'desc')).get();
   }
 
   public fetchReviewsUserWrote(userid: string): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.db.collectionGroup('reviews', data => data.where('userid', '==', userid)).get();
+    return this.db.collectionGroup('reviews', data => data.where('userid', '==', userid).orderBy('date', 'desc')).get();
 
   }
 
