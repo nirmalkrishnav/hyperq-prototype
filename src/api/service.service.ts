@@ -29,7 +29,7 @@ export class ServiceService {
 
   public serachTerm(searchedTerm): Observable<any> {
     return this.db.collection(this.doctorRef, ref => ref.where('name', '==', searchedTerm)).get();
-    //return this.db.collection(this.doctorRef, ref => ref.orderBy('name').startAt(searchedTerm)).get();
+    // return this.db.collection(this.doctorRef, ref => ref.orderBy('name').startAt(searchedTerm)).get();
   }
 
   public fetchDoctorDetail(id: string): Observable<any> {
@@ -43,6 +43,12 @@ export class ServiceService {
   public fetchReviewsUserWrote(userid: string): Observable<any> {
     // tslint:disable-next-line:max-line-length
     return this.db.collectionGroup('reviews', data => data.where('userid', '==', userid)).get();
+
+  }
+
+  public submitReviewForDoctor(doctorDocID: string, review: any) {
+    console.log(review);
+    return this.db.collection(this.doctorRef).doc(doctorDocID).collection('reviews').add(review);
 
   }
 }

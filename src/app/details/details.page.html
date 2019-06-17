@@ -9,7 +9,82 @@
 </ion-header>
 
 <ion-content>
-  {{doctorDetails | json}}
 
-  {{reviews| json}}
+  <ion-card class="welcome-card" *ngIf="doctorDetails">
+
+
+    <ion-img src="/assets/shapes.svg"></ion-img>
+    <ion-card-content>
+      <ion-label>
+        <h6>
+          {{doctorDetails.name}}
+        </h6>
+        <p class="small">
+          {{doctorDetails.bio}}
+        </p>
+      </ion-label>
+
+      <p>
+
+        <ion-badge color="primary">
+          <ion-icon name="thumbs-up"></ion-icon>
+          {{doctorDetails.rating * 10}}
+        </ion-badge>
+
+        <ion-badge color="light">
+          <ion-icon name="chatboxes"></ion-icon>
+          {{doctorDetails.rating * 2}}
+        </ion-badge>
+        <ion-badge color="light">
+          <ion-icon name="pin"></ion-icon>
+          {{doctorDetails.address}}
+        </ion-badge>
+
+      </p>
+      <p>Rs.{{doctorDetails.fee}}</p>
+      <ion-text color="secondary">
+        <span class="uk-text-small" *ngFor="let spl  of doctorDetails.special">
+          #{{spl}}
+        </span>
+      </ion-text>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-segment (ionChange)="segmentChanged($event)" value="reviews">
+    <ion-segment-button value="reviews">
+      <ion-label>Reviews</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="checkins">
+      <ion-label>Check in list</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list *ngIf="showReview">
+    <ion-item>
+      <ion-textarea [(ngModel)]="myReview"></ion-textarea>
+      <ion-button (click)="submitReview();">Submit</ion-button>
+
+    </ion-item>
+    <ion-item *ngFor="let review of reviews">
+
+      <ion-label>
+        <ion-text text-wrap>
+          <b>{{review.displayName}} says</b> <br />
+          {{review.comment}} </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+
+      <ion-button>
+        <ion-icon name="pin"></ion-icon>
+        Check in
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

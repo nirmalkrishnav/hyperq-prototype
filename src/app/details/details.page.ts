@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/api/service.service';
+import { AuthenticationService } from 'src/auth/authentication.service';
 
 @Component({
   selector: 'app-details',
@@ -13,7 +14,12 @@ export class DetailsPage implements OnInit {
   id: string;
   doctorDetails: any;
   reviews: any = [];
-  constructor(private activatedRoute: ActivatedRoute, private service: ServiceService) { }
+
+  showReview = true;
+  myReview: string;
+
+
+  constructor(private activatedRoute: ActivatedRoute, private service: ServiceService, public autherservice: AuthenticationService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(pmap => {
@@ -36,6 +42,25 @@ export class DetailsPage implements OnInit {
     });
   }
 
+
+  segmentChanged(ev: any) {
+    // console.log('Segment changed', ev.detail.value);
+    if (ev.detail.value === 'reviews') {
+      this.showReview = true;
+    } else {
+      this.showReview = false;
+    }
+  }
+  submitReview() {
+    const review = {
+      comment: this.myReview,
+      date: new Date(),
+      displayName: this.autherservice.userData.displayName,
+      userid: this.autherservice.userData.uid
+    };
+
+    this.service.submitReviewForDoctor(this.id, review);
+  }
 
 
 }
