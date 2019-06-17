@@ -22,6 +22,10 @@ export class Tab1Page {
     private service: ServiceService,
     public loadingController: LoadingController,
     private router: Router) {
+    this.loadPage();
+  }
+
+  loadPage() {
     this.getAllDoctors();
     this.getAllHospitals();
   }
@@ -99,4 +103,7 @@ export class Tab1Page {
   //     });
 
   // }
+  ionViewWillEnter() {
+    this.loadPage();
+  }
 }

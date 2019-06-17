@@ -46,6 +46,10 @@ export class Tab5Page implements OnInit {
   }
 
   ngOnInit() {
+    this.loadPage();
+  }
+
+  loadPage() {
     this.service.fetchReviewsUserWrote(this.autherservice.userData.uid).subscribe(querySnapshot => {
       this.myReviews = [];
       querySnapshot.forEach(doc => {
@@ -54,6 +58,10 @@ export class Tab5Page implements OnInit {
         this.myReviews.push(r);
       });
     });
+  }
+
+  ionViewWillEnter() {
+    this.loadPage();
   }
 
 }
