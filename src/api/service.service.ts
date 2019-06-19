@@ -5,7 +5,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Favourites, Doctor } from 'src/app/Models/Favourites.model';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { DocumentSnapshot } from '@firebase/firestore-types';
+import { DocumentSnapshot, FieldValue } from '@firebase/firestore-types';
+import { firestore } from 'firebase';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,7 @@ export class ServiceService {
 
   constructor(
     private http: Http,
-    private db: AngularFirestore
+    private db: AngularFirestore,
   ) { }
 
   public fetchAllDoctors(): Observable<any> {
@@ -47,8 +50,17 @@ export class ServiceService {
   }
 
   public submitReviewForDoctor(doctorDocID: string, review: any) {
-    console.log(review);
     return this.db.collection(this.doctorRef).doc(doctorDocID).collection('reviews').add(review);
+  }
 
+  public checkInUser(doctorDocID: string, m) {
+    return this.db.collection(this.doctorRef).doc(doctorDocID).update({
+      checkin: firestore.FieldValue.arrayUnion(m)
+    });
+  }
+
+  public getCheckedInUsers(doctorDocID: string): Observable<any> {
+    return this.db.collection(this.doctorRef).doc(doctorDocID).valueChanges();
+    // return this.db.collection(this.doctorRef).doc(doctorDocID).get('checkin');
   }
 }

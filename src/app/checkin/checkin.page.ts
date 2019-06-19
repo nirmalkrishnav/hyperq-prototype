@@ -21,13 +21,16 @@ export class CheckinPage extends Hyperq implements OnInit {
     initialSlide: 0,
     speed: 400
   };
+
+  usersList: any;
   constructor(
     activatedRoute: ActivatedRoute,
-    service: ServiceService,
+    private service: ServiceService,
     autherservice: AuthenticationService,
     router: Router,
     public modalCtrl: ModalController) {
     super();
+    this.getCheckedinUsers();
   }
 
 
@@ -52,7 +55,19 @@ export class CheckinPage extends Hyperq implements OnInit {
   ionViewWillEnter() {
     this.loadPage();
   }
-  submit() {
+  getCheckedinUsers() {
+    this.service.getCheckedInUsers(this.model.doctorID).subscribe(data => {
+      this.usersList = data;
+    });
+  }
 
+  confirmCheckin() {
+    const m = {
+      userid: this.model.uid,
+      displayName: this.model.displayName,
+      dataTime: new Date()
+    };
+
+    this.service.checkInUser(this.model.doctorID, m);
   }
 }
