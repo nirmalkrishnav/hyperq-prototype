@@ -52,5 +52,7 @@ export class CheckinPage extends Hyperq implements OnInit {
   ionViewWillEnter() {
     this.loadPage();
   }
+  submit() {
 
+  }
 }
