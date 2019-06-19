@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { Hyperq } from 'src/app/Models/hyperq.model';
 
 
 const TOKEN_KEY = 'auth-token';
@@ -29,9 +30,10 @@ interface User {
 })
 
 
-export class AuthenticationService {
+export class AuthenticationService extends Hyperq {
   user: Observable<User>;
   userData: User;
+  model = Hyperq.Instance;
   constructor(
     private storage: Storage,
     private plt: Platform,
@@ -39,6 +41,7 @@ export class AuthenticationService {
     private afs: AngularFirestore,
     private router: Router
   ) {
+    super();
     this.plt.ready().then(() => {
 
       //// Get auth data, then get firestore user document || null
@@ -46,6 +49,11 @@ export class AuthenticationService {
         switchMap(user => {
           if (user) {
             this.userData = user;
+
+            this.model.displayName = this.userData.displayName;
+            this.model.uid = this.userData.uid;
+            this.model.photoURL = this.userData.photoURL;
+            this.model.email = this.userData.email;
             return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
           } else {
             return of(null);
@@ -84,6 +92,7 @@ export class AuthenticationService {
       displayName: user.displayName,
       photoURL: user.photoURL
     };
+
     return userRef.set(data, { merge: true });
 
   }
@@ -91,7 +100,7 @@ export class AuthenticationService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     });
   }
 }

@@ -20,6 +20,7 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CheckinPageModule } from './checkin/checkin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +34,8 @@ import { AppComponent } from './app.component';
     AngularFireAuthModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    CheckinPageModule
   ],
   providers: [
     HttpClientModule,

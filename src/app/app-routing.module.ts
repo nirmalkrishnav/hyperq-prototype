@@ -12,7 +12,8 @@ const routes: Routes = [
     path: 'public',
     canActivate: [AuthGaurdGuard],
     loadChildren: './tabs/tabs.module#TabsPageModule'
-  },
+  },  { path: 'checkin', loadChildren: './checkin/checkin.module#CheckinPageModule' },
+
 ];
 @NgModule({
   imports: [

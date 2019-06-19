@@ -1,0 +1,60 @@
+<ion-content>
+  <ion-slides pager="false" [options]="slideOpts">
+    <ion-slide>
+      <div>
+
+        <ion-text>
+          Your consultation shall be in
+        </ion-text>
+        <ion-text color="primary">
+          <h3>45 minutes</h3>
+
+        </ion-text>
+        <ion-text>
+          Swipe right to see list
+        </ion-text>
+      </div>
+
+    </ion-slide>
+    <ion-slide>
+
+      <!-- [scrollEvents]="true" #content -->
+      <ion-list>
+        <ion-item>
+          <ion-label>Pokémon Yellow</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Mega Man X</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>The Legend of Zelda</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Pac-Man</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Super Mario World</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{model.displayName}}</ion-label>
+        </ion-item>
+      </ion-list>
+
+    </ion-slide>
+
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+
+<ion-footer>
+  <!-- <ion-button (click)="dismiss();">
+    x
+  </ion-button> -->
+  <ion-button (click)="submit()">
+    Confirm and Checkin
+  </ion-button>
+</ion-footer>

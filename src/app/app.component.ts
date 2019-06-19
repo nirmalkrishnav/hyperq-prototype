@@ -25,7 +25,6 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      console.log(this.authenticationService.userData.displayName);
     });
   }
 }

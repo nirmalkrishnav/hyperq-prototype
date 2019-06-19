@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from 'src/api/service.service';
 import { AuthenticationService } from 'src/auth/authentication.service';
 import { finalize } from 'rxjs/operators';
+import { Hyperq } from '../Models/hyperq.model';
+import { ModalController } from '@ionic/angular';
+import { CheckinPage } from '../checkin/checkin.page';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
-export class DetailsPage implements OnInit {
+export class DetailsPage extends Hyperq implements OnInit {
 
   name: string;
   id: string;
@@ -18,9 +21,17 @@ export class DetailsPage implements OnInit {
 
   showReview = true;
   myReview: string;
+  model = Hyperq.Instance;
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    protected service: ServiceService,
+    protected autherservice: AuthenticationService,
+    protected router: Router,
+    public modalController: ModalController) {
 
 
-  constructor(private activatedRoute: ActivatedRoute, private service: ServiceService, public autherservice: AuthenticationService) { }
+    super();
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(pmap => {
@@ -67,5 +78,23 @@ export class DetailsPage implements OnInit {
     });
   }
 
+  navigateToCheckin() {
+    this.model.doctorID = this.id;
 
+    // this.router.navigate([`/checkin`]);
+    this.presentModal();
+  }
+
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: CheckinPage,
+      componentProps: { value: 123 },
+      showBackdrop: true,
+      backdropDismiss: true,
+      animated: true,
+      cssClass: ['customModal'],
+    });
+    return await modal.present();
+  }
 }

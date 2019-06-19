@@ -42,7 +42,8 @@ export class Tab5Page implements OnInit {
   }
 
   logout() {
-    this.presentAlertMultipleButtons();
+    // this.presentAlertMultipleButtons();
+    this.autherservice.signOut();
   }
 
   ngOnInit() {
