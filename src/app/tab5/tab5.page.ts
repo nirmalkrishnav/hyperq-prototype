@@ -3,6 +3,7 @@ import { AuthenticationService } from 'src/auth/authentication.service';
 import { map, subscribeOn } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import { ServiceService } from 'src/api/service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab5',
@@ -12,8 +13,15 @@ import { ServiceService } from 'src/api/service.service';
 export class Tab5Page implements OnInit {
 
   myReviews: any;
-
-  constructor(public autherservice: AuthenticationService, public alertController: AlertController, private service: ServiceService) {
+  favDocs: any;
+  constructor(
+    public autherservice: AuthenticationService,
+    public alertController: AlertController,
+    private service: ServiceService,
+    private router: Router) {
+    this.service.favDocs.subscribe(data => {
+      this.favDocs = data;
+    });
   }
 
   async presentAlertMultipleButtons() {
@@ -63,6 +71,11 @@ export class Tab5Page implements OnInit {
 
   ionViewWillEnter() {
     this.loadPage();
+  }
+
+  navToDetail(doc) {
+    this.router.navigate([`/details/${doc.ID}/${doc.name}`]);
+
   }
 
 }

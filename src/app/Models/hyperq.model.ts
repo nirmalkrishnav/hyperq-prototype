@@ -22,6 +22,7 @@ export class Hyperq {
     email: string;
 
     doctorID: string;
+    favourites: string[];
 
     constructor() { }
 }

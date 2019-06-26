@@ -14,11 +14,16 @@
     <p class="ion-padding list-heading">Doctors</p>
     <div *ngIf="!skeletonLoading">
       <ion-list>
-        <ion-card class="welcome-card" *ngFor="let doctor of doctors" (click)="showDetails(doctor)">
+        <ion-card class="welcome-card" *ngFor="let doctor of doctors">
 
-
-          <ion-img src="/assets/shapes.svg"></ion-img>
-          <ion-card-content>
+          <div (click)="addToFav(doctor)">
+            <ion-img src="/assets/shapes.svg"></ion-img>
+            <p class="heart-container">
+              <ion-icon name="heart-empty" *ngIf="!doctor.heart"></ion-icon>
+              <ion-icon name="heart" class="font-red" *ngIf="doctor.heart"></ion-icon>
+            </p>
+          </div>
+          <ion-card-content (click)="showDetails(doctor)">
             <ion-label>
               <h6>
                 {{doctor.name}}
@@ -51,6 +56,8 @@
                 #{{spl}}
               </span>
             </ion-text>
+
+
           </ion-card-content>
 
         </ion-card>

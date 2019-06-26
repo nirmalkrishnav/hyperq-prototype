@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Favourites, Doctor } from 'src/app/Models/Favourites.model';
 
@@ -16,6 +16,9 @@ import { firestore } from 'firebase';
 export class ServiceService {
   hospitalRef = 'hospitals';
   doctorRef = 'doctors';
+  userRef = 'users';
+
+  favDocs = new BehaviorSubject<any>('');
 
   constructor(
     private http: Http,
@@ -62,5 +65,15 @@ export class ServiceService {
   public getCheckedInUsers(doctorDocID: string): Observable<any> {
     return this.db.collection(this.doctorRef).doc(doctorDocID).valueChanges();
     // return this.db.collection(this.doctorRef).doc(doctorDocID).get('checkin');
+  }
+
+  public addtofav(doctorDocID: string, userID: string) {
+    return this.db.collection(this.userRef).doc(userID).update({
+      favourites: firestore.FieldValue.arrayUnion(doctorDocID)
+    });
+  }
+
+  public getFavs(userID: string) {
+    return this.db.collection(this.userRef).doc(userID).get();
   }
 }

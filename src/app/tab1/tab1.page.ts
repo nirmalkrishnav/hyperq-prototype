@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { ServiceService } from './../../api/service.service';
 import { Favourites, Doctor } from '../Models/Favourites.model';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Hyperq } from '../Models/hyperq.model';
+import { query } from '@angular/core/src/render3';
+import { QuerySnapshot } from '@firebase/firestore-types';
 
 
 @Component({
@@ -16,12 +19,15 @@ export class Tab1Page {
   favourites: Favourites;
   doctors: any[] = [];
   hospitals: any[] = [];
+  model = Hyperq.Instance;
 
   skeletonLoading: boolean;
+
   constructor(
     private service: ServiceService,
     public loadingController: LoadingController,
-    private router: Router) {
+    private router: Router,
+    public toastController: ToastController) {
     this.loadPage();
   }
 
@@ -51,7 +57,7 @@ export class Tab1Page {
         coll['ID'] = d.id;
         this.doctors.push(coll);
       });
-      this.skeletonLoading = false;
+      this.getFavs();
     });
   }
 
@@ -106,4 +112,63 @@ export class Tab1Page {
   ionViewWillEnter() {
     this.loadPage();
   }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Added to favourites',
+      duration: 1000
+    });
+    toast.present();
+  }
+
+  async presentToastWithOptions() {
+    const toast = await this.toastController.create({
+      header: 'Toast header',
+      message: 'Click to Close',
+      position: 'top',
+      buttons: [
+        {
+          side: 'start',
+          icon: 'star',
+          text: 'Favorite',
+          handler: () => {
+            console.log('Favorite clicked');
+          }
+        }, {
+          text: 'Done',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    toast.present();
+  }
+
+  addToFav(doctor) {
+    const m = this.model.uid;
+    console.log(this.model.favourites);
+    this.service.addtofav(doctor.ID, m).finally(() => {
+      this.presentToast();
+      doctor.heart = true;
+    });
+  }
+  getFavs() {
+    this.service.getFavs(this.model.uid).subscribe((qsnapshot) => {
+      this.model.favourites = qsnapshot.data().favourites;
+      let favs;
+      this.doctors.forEach(doc => {
+        if (this.model.favourites.includes(doc.ID)) {
+          doc.heart = true;
+        } else {
+          doc.heart = false;
+        }
+      });
+      favs = this.doctors.filter(d => d.heart);
+      this.service.favDocs.next(favs);
+      this.skeletonLoading = false;
+    });
+  }
+
 }

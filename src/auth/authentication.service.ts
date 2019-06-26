@@ -21,6 +21,7 @@ interface User {
   photoURL?: string;
   displayName?: string;
   favoriteColor?: string;
+  favourites?: string[];
 }
 
 
@@ -90,7 +91,7 @@ export class AuthenticationService extends Hyperq {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
     };
 
     return userRef.set(data, { merge: true });

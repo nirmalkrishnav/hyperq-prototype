@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab5</ion-title>
+    <ion-title>Favourites</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,15 +27,27 @@
     </ion-thumbnail>
 
   </ion-item>
+  <div class="container">
+    <div class="ion-padding list-heading">Favourites</div>
+    <ion-item *ngFor="let doc of favDocs">
+      <ion-label (click)="navToDetail(doc)">
+        <ion-text text-wrap>
+          <b>Dr. {{doc.name}}, </b>
+          <small>{{doc.address}}</small> <br />
+          <small class="uk-text-small" *ngFor="let spl of doc.special">#{{spl}} </small>
+        </ion-text>
+      </ion-label>
+    </ion-item>
 
-  <ion-item *ngFor="let review of myReviews">
+    <div class="ion-padding list-heading">Reviews</div>
 
-    <ion-label>
-      <ion-text text-wrap>
-        <b>About {{review.docName}} </b> <br />
-        {{review.comment}} </ion-text>
-    </ion-label>
-  </ion-item>
-
+    <ion-item *ngFor="let review of myReviews">
+      <ion-label>
+        <ion-text text-wrap>
+          <b>About {{review.docName}} </b> <br />
+          {{review.comment}} </ion-text>
+      </ion-label>
+    </ion-item>
+  </div>
 
 </ion-content>

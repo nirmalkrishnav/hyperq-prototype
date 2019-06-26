@@ -22,7 +22,7 @@
       <ion-list *ngIf="usersList?.checkin.length">
         <ion-item *ngFor="let u of usersList?.checkin">
           <ion-label>{{u.displayName}}
-            at {{u.dataTime.toDate()| date: long}}
+            at {{u.dataTime.toDate() | date: long}}
           </ion-label>
         </ion-item>
 
