@@ -1,7 +1,7 @@
 <ion-tabs>
-  <div class="ion-padding checked-in-panel" *ngIf="model.checkedIn">
+  <div class="ion-padding checked-in-panel" *ngIf="model.checkedIn" (click)="navigateToStage()">
     <ion-icon name="location"></ion-icon>
-    You have checked in to {{model.currentDoctor?.name }}
+    You have checked in to {{model.checkedInDocName}}
   </div>
 
   <ion-tab-bar slot="bottom">

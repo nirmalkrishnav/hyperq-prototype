@@ -26,9 +26,14 @@ export class Hyperq {
     doctorID: string;
     favourites: string[];
 
-    checkedInDoctor: string;
-    checkedIn = false;
     currentDoctor: any;
+    checkedInDoctor: any;
+
+
+    checkedIn = false;
+    checkedInDocID: string;
+    checkedInDocName: string;
+
 
     constructor() { }
 }

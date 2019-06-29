@@ -72,10 +72,11 @@ export class CheckinPage implements OnInit {
 
       this.model.checkedInDoctor = this.model.currentDoctor;
       this.model.checkedIn = true;
+
       const l = {
-        checkin: true,
+        status: true,
         doctorID: this.model.doctorID,
-        checkedinDoctor: this.model.checkedInDoctor,
+        docName: this.model.checkedInDoctor.name,
       };
       this.service.updateUserCheckin(this.model.uid, l);
       this.navigateToStage();

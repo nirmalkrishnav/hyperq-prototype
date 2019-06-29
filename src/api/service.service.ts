@@ -25,6 +25,10 @@ export class ServiceService {
     private db: AngularFirestore,
   ) { }
 
+  public fetchUserByID(uid) {
+    return this.db.collection(this.userRef).doc(uid).get();
+  }
+
   public fetchAllDoctors(): Observable<any> {
     return this.db.collection(this.doctorRef).get();
   }
@@ -80,6 +84,12 @@ export class ServiceService {
   updateUserCheckin(userID, m) {
     return this.db.collection(this.userRef).doc(userID).update({
       checkin: m
+    });
+  }
+
+  checkoutUser(userID) {
+    return this.db.collection(this.userRef).doc(userID).update({
+      checkin: firestore.FieldValue.delete()
     });
   }
 }
