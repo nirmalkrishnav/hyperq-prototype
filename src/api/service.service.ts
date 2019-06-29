@@ -9,7 +9,6 @@ import { DocumentSnapshot, FieldValue } from '@firebase/firestore-types';
 import { firestore } from 'firebase';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -60,14 +59,18 @@ export class ServiceService {
     return this.db.collection(this.doctorRef).doc(doctorDocID).collection('reviews').add(review);
   }
 
-  public checkInUser(doctorDocID: string, m) {
-    return this.db.collection(this.doctorRef).doc(doctorDocID).update({
-      checkin: firestore.FieldValue.arrayUnion(m)
+  public checkInUser(doctorDocID: string, m, uid, l) {
+    this.db.collection(this.doctorRef).doc(doctorDocID).collection('checkins').add(m).then(docRef => {
+      console.log(docRef.id);
+      l.docref = docRef.id;
+      this.updateUserCheckin(uid, l);
     });
+
   }
 
   public getCheckedInUsers(doctorDocID: string): Observable<any> {
-    return this.db.collection(this.doctorRef).doc(doctorDocID).valueChanges();
+    return this.db.collection(this.doctorRef).doc(doctorDocID)
+      .collection('checkins', data => data.orderBy('dataTime', 'desc')).valueChanges();
     // return this.db.collection(this.doctorRef).doc(doctorDocID).get('checkin');
   }
 
@@ -90,6 +93,12 @@ export class ServiceService {
   checkoutUser(userID) {
     return this.db.collection(this.userRef).doc(userID).update({
       checkin: firestore.FieldValue.delete()
+    });
+  }
+
+  public deleteCheckedinUsersFromDoctors(doctorID, userID, docrefID) {
+    return this.db.collection(this.doctorRef).doc(doctorID).collection('checkins').doc(docrefID).update({
+      checkOutStatus: true
     });
   }
 }

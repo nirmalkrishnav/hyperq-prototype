@@ -18,13 +18,14 @@
     <ion-slide>
 
       <!-- [scrollEvents]="true" #content -->
-      <ion-list *ngIf="usersList?.checkin?.length">
-        <ion-item *ngFor="let u of usersList?.checkin">
-          <ion-label>{{u.displayName}}
-            at {{u.dataTime.toDate() | date: 'h:mm a, yyyy-MM-dd'}}
-          </ion-label>
+      <ion-list *ngIf="usersList">
+        <ion-item *ngFor="let u of usersList">
+          <div *ngIf="u?.checkOutStatus == false">
+            <ion-label>{{u.displayName}} -- {{u.checkOutStatus}}--
+              at {{u.dataTime.toDate() | date: 'h:mm a, yyyy-MM-dd'}}
+            </ion-label>
+          </div>
         </ion-item>
-
       </ion-list>
 
     </ion-slide>

@@ -58,7 +58,7 @@ export class CheckinPage implements OnInit {
     this.service.getCheckedInUsers(this.model.doctorID).subscribe(data => {
       this.usersList = data;
 
-      this.usersList.checkin = this.usersList.checkin.sort((a, b) => parseFloat(a.dataTime) - parseFloat(b.dataTime));
+      // this.usersList.checkin = this.usersList.checkin.sort((a, b) => parseFloat(a.dataTime) - parseFloat(b.dataTime));
     });
   }
 
@@ -66,21 +66,25 @@ export class CheckinPage implements OnInit {
     const m = {
       userid: this.model.uid,
       displayName: this.model.displayName,
-      dataTime: new Date()
+      dataTime: new Date(),
+      checkOutStatus: false
     };
-    this.service.checkInUser(this.model.doctorID, m).finally(() => {
 
-      this.model.checkedInDoctor = this.model.currentDoctor;
-      this.model.checkedIn = true;
+    this.model.checkedInDoctor = this.model.currentDoctor;
+    this.model.checkedIn = true;
+    this.model.checkedInDocID = this.model.doctorID;
 
-      const l = {
-        status: true,
-        doctorID: this.model.doctorID,
-        docName: this.model.checkedInDoctor.name,
-      };
-      this.service.updateUserCheckin(this.model.uid, l);
-      this.navigateToStage();
-    });
+
+    const l = {
+      status: true,
+      doctorID: this.model.checkedInDocID,
+      docName: this.model.checkedInDoctor.name,
+    };
+
+    const code = this.service.checkInUser(this.model.checkedInDocID, m, this.model.uid, l);
+
+    this.navigateToStage();
+
 
   }
 

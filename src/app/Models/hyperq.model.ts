@@ -33,6 +33,7 @@ export class Hyperq {
     checkedIn = false;
     checkedInDocID: string;
     checkedInDocName: string;
+    docrefID: string;
 
 
     constructor() { }

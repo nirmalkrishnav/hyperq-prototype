@@ -25,6 +25,7 @@ export class TabsPage {
           this.model.checkedIn = user.checkin.status;
           this.model.checkedInDocID = user.checkin.doctorID;
           this.model.checkedInDocName = user.checkin.docName;
+          this.model.docrefID = user.checkin.docref;
         } else {
           this.model.checkedIn = false;
         }

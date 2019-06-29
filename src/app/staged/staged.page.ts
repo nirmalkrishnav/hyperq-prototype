@@ -26,17 +26,19 @@ export class StagedPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    if (this.model.checkedInDocID) {
-      this.router.navigate(['public']);
-    } else {
-      this.getCheckedinUsers();
-    }
+    console.log(this.model.checkedInDocID);
+    // this.router.navigate(['public']);
+    // } else {
+    this.getCheckedinUsers();
+    // }
   }
 
   checkout() {
     this.service.checkoutUser(this.model.uid).finally(() => {
+      this.service.deleteCheckedinUsersFromDoctors(this.model.checkedInDocID, this.model.uid, this.model.docrefID);
       this.model.checkedIn = false;
       this.router.navigate(['public']);
     });
+
   }
 }
