@@ -13,6 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGaurdGuard],
     loadChildren: './tabs/tabs.module#TabsPageModule'
   },  { path: 'checkin', loadChildren: './checkin/checkin.module#CheckinPageModule' },
+  { path: 'staged', loadChildren: './staged/staged.module#StagedPageModule' },
 
 ];
 @NgModule({

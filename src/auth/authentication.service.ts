@@ -31,7 +31,7 @@ interface User {
 })
 
 
-export class AuthenticationService extends Hyperq {
+export class AuthenticationService {
   user: Observable<User>;
   userData: User;
   model = Hyperq.Instance;
@@ -42,7 +42,6 @@ export class AuthenticationService extends Hyperq {
     private afs: AngularFirestore,
     private router: Router
   ) {
-    super();
     this.plt.ready().then(() => {
 
       //// Get auth data, then get firestore user document || null

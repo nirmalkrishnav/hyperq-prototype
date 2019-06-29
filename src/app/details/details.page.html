@@ -82,7 +82,8 @@
   <ion-toolbar>
     <ion-buttons slot="start">
 
-      <ion-button (click)="navigateToCheckin();">
+      <ion-button (click)="navigateToCheckin();" [disabled]="model.checkedIn">
+        {{model.checkedIn}}
         <ion-icon name="pin"></ion-icon>
         Check in
       </ion-button>

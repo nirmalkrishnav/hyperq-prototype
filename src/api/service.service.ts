@@ -76,4 +76,10 @@ export class ServiceService {
   public getFavs(userID: string) {
     return this.db.collection(this.userRef).doc(userID).get();
   }
+
+  updateUserCheckin(userID, m) {
+    return this.db.collection(this.userRef).doc(userID).update({
+      checkin: m
+    });
+  }
 }

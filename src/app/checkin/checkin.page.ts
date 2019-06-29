@@ -12,7 +12,7 @@ import { NavParams, ModalController } from '@ionic/angular';
   styleUrls: ['./checkin.page.scss'],
 })
 
-export class CheckinPage extends Hyperq implements OnInit {
+export class CheckinPage implements OnInit {
   model = Hyperq.Instance;
   @Input() value: number;
   @ViewChild('content') private content: any;
@@ -27,9 +27,8 @@ export class CheckinPage extends Hyperq implements OnInit {
     activatedRoute: ActivatedRoute,
     private service: ServiceService,
     autherservice: AuthenticationService,
-    router: Router,
+    private router: Router,
     public modalCtrl: ModalController) {
-    super();
     this.getCheckedinUsers();
   }
 
@@ -58,6 +57,8 @@ export class CheckinPage extends Hyperq implements OnInit {
   getCheckedinUsers() {
     this.service.getCheckedInUsers(this.model.doctorID).subscribe(data => {
       this.usersList = data;
+
+      this.usersList.checkin = this.usersList.checkin.sort((a, b) => parseFloat(a.dataTime) - parseFloat(b.dataTime));
     });
   }
 
@@ -67,7 +68,24 @@ export class CheckinPage extends Hyperq implements OnInit {
       displayName: this.model.displayName,
       dataTime: new Date()
     };
+    this.service.checkInUser(this.model.doctorID, m).finally(() => {
 
-    this.service.checkInUser(this.model.doctorID, m);
+      this.model.checkedInDoctor = this.model.currentDoctor;
+      this.model.checkedIn = true;
+      const l = {
+        checkin: true,
+        doctorID: this.model.doctorID,
+        checkedinDoctor: this.model.checkedInDoctor,
+      };
+      this.service.updateUserCheckin(this.model.uid, l);
+      this.navigateToStage();
+    });
+
   }
+
+  navigateToStage(): void {
+    this.dismiss();
+    this.router.navigate([`/staged`]);
+  }
+
 }

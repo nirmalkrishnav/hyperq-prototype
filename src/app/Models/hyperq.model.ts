@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+
 export class Hyperq {
 
     // protected set name(name) {
@@ -23,6 +25,10 @@ export class Hyperq {
 
     doctorID: string;
     favourites: string[];
+
+    checkedInDoctor: string;
+    checkedIn = false;
+    currentDoctor: any;
 
     constructor() { }
 }

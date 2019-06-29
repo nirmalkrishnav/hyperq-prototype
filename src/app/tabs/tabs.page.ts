@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Hyperq } from '../Models/hyperq.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
+  model = Hyperq.Instance;
+  constructor(private router: Router) {
+    if (this.model.uid) {
 
-  constructor() { }
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
 
 }

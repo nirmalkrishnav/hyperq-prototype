@@ -8,7 +8,6 @@
         </ion-text>
         <ion-text color="primary">
           <h3>45 minutes</h3>
-
         </ion-text>
         <ion-text>
           Swipe right to see list
@@ -19,7 +18,7 @@
     <ion-slide>
 
       <!-- [scrollEvents]="true" #content -->
-      <ion-list *ngIf="usersList?.checkin.length">
+      <ion-list *ngIf="usersList?.checkin?.length">
         <ion-item *ngFor="let u of usersList?.checkin">
           <ion-label>{{u.displayName}}
             at {{u.dataTime.toDate() | date: 'h:mm a, yyyy-MM-dd'}}
@@ -41,7 +40,8 @@
 
   <ion-item-sliding start="LTR">
     <ion-item-options side="start">
-      <ion-item-option color="success" (click)="confirmCheckin()">confirm</ion-item-option>
+      <ion-item-option color="success" (click)="confirmCheckin()" [disabled]="model.checkedIn">confirm
+      </ion-item-option>
     </ion-item-options>
 
     <ion-item>

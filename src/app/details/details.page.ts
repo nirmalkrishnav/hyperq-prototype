@@ -12,7 +12,7 @@ import { CheckinPage } from '../checkin/checkin.page';
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
-export class DetailsPage extends Hyperq implements OnInit {
+export class DetailsPage implements OnInit {
 
   name: string;
   id: string;
@@ -28,9 +28,6 @@ export class DetailsPage extends Hyperq implements OnInit {
     protected autherservice: AuthenticationService,
     protected router: Router,
     public modalController: ModalController) {
-
-
-    super();
   }
 
   ngOnInit() {
@@ -80,7 +77,7 @@ export class DetailsPage extends Hyperq implements OnInit {
 
   navigateToCheckin() {
     this.model.doctorID = this.id;
-
+    this.model.currentDoctor = this.doctorDetails;
     // this.router.navigate([`/checkin`]);
     this.presentModal();
   }
