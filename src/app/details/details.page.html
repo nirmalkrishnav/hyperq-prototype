@@ -50,7 +50,7 @@
     </ion-card-content>
 
   </ion-card>
-
+  <!-- 
   <ion-segment (ionChange)="segmentChanged($event)" value="reviews">
     <ion-segment-button value="reviews">
       <ion-label>Reviews</ion-label>
@@ -58,13 +58,13 @@
     <ion-segment-button value="checkins">
       <ion-label>Check in list</ion-label>
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment> -->
 
   <ion-list *ngIf="showReview">
     <ion-item>
-      <ion-textarea [(ngModel)]="myReview"></ion-textarea>
+      <ion-textarea [(ngModel)]="myReview" placeholder="Write your review">
+      </ion-textarea>
       <ion-button (click)="submitReview();">Submit</ion-button>
-
     </ion-item>
     <ion-item *ngFor="let review of reviews">
 
