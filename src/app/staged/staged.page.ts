@@ -19,8 +19,6 @@ export class StagedPage implements OnInit {
   getCheckedinUsers() {
     this.service.getCheckedInUsers(this.model.checkedInDocID).subscribe(data => {
       this.usersList = data;
-
-      this.usersList.checkin = this.usersList.checkin.sort((a, b) => parseFloat(a.dataTime) - parseFloat(b.dataTime));
     });
 
   }
